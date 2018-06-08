@@ -27,12 +27,15 @@ body<-dashboardBody(
     fluidRow(
       tabBox(width = 12,
         tabPanel(title = "Schema",
-          # h4("Semester Planner"),
-          # uiOutput("choices")
-          plotOutput("hm", width = "97%")
+          timevisOutput("schema")
         ),
         tabPanel(title = "Redigera",
-          selectInput("editName", "Välj person:", choices = Names)
+          selectInput("person", "Välj person", choices = Names),
+          selectInput("eventName", "Välj händelse", choices = c("Semester", "Fält", "Kontor")),
+          dateInput("startDate", "Startdatum", as.Date(Sys.Date())),
+          dateInput("endDate", "Slutdatum", as.Date(Sys.Date()),
+          actionButton("addEvent", "Add"),
+          tableOutput("table")
         )
       )
     )
