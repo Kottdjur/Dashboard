@@ -33,9 +33,9 @@ body<-dashboardBody(
           selectInput("person", "Välj person", choices = Names),
           selectInput("eventName", "Välj händelse", choices = c("Semester", "Fält", "Kontor")),
           dateInput("startDate", "Startdatum", as.Date(Sys.Date())),
-          dateInput("endDate", "Slutdatum", as.Date(Sys.Date()),
+          dateInput("endDate", "Slutdatum", as.Date(Sys.Date())),
           actionButton("addEvent", "Add"),
-          tableOutput("table")
+          tableOutput("test")
         )
       )
     )
@@ -50,7 +50,7 @@ body<-dashboardBody(
   )
   
   
-    )
+  )
 
 # Define UI for application that draws a histogram
 ui <- dashboardPage(title="Greensway Week",
