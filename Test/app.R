@@ -9,7 +9,6 @@ shinyApp(
   # UI
   ui = fluidPage(
     tableOutput("test"),
-    tableOutput("combined"),
     timevisOutput("schema")
   ),
   
@@ -38,14 +37,16 @@ shinyApp(
     
     startID <- tail(weekData$id, 1) + 1
     
-    calendarRV <- reactiveFileReader(1000, session, "C:/Users/kottd/Documents/Dashboard/Test/calendar_backup.csv", read.csv, stringsAsFactors = FALSE)
+    filepath = "H:/Dokument/Dashboard/Test/calendar_backup.csv"
+    #filepath = "C:/Users/kottd/Documents/Dashboard/Test/calendar_backup.csv"
+    
+    calendarRV <- reactiveFileReader(1000, session, filepath, read.csv, stringsAsFactors = FALSE)
+    
+    # This output works
     output$test <- renderTable({calendarRV()})
     
-    rv <- reactiveValues()
     
-    combinedData <- eventReactive(calendarRV, {
-      print("calendar updated")
-      
+    combinedData <- reactive({
       calendar <- calendarRV()
       
       calendarData <- data.frame(
@@ -61,8 +62,6 @@ shinyApp(
       
       return(combinedData)
     })
-    
-    output$combined <- renderTable({combinedData()})
     
     # Schedule plot
     output$schema <- renderTimevis({

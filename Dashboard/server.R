@@ -5,12 +5,14 @@ server <- function(input, output, session) {
   weekNr <- reactiveVal(week(Sys.Date()))
   temp <- reactiveVal(fromJSON(urlWeather)$main$temp)
   
-  rv <- reactiveValues()
-  calendarRV <- reactiveFileReader(1000, session, "C:/Users/kottd/Documents/Dashboard/Dashboard/calendar_backup.csv", read.csv, stringsAsFactors = FALSE)
-  output$test <- renderTable({calendarRV()})
+  # Where to put this? One file reader per session or one shared with all sessions.
+  # Problem: reactiveFileReader refreshes the calendar so you get moved back when you try to scroll.
+  backup_file = "H:/Dokument/Dashboard/Dashboard/calendar_backup.csv"
+  #backup_file = "C:/Users/kottd/Documents/Dashboard/Test/calendar_backup.csv"
+  calendarRV <- reactiveFileReader(10000, session, backup_file, read.csv, stringsAsFactors = FALSE)
   
-  # Update calendar data when the csv is changed
-  observeEvent(calendarRV, {
+  # Update calendar when the csv is changed
+  combinedData <- reactive({
     calendar <- calendarRV()
     
     calendarData <- data.frame(
@@ -24,14 +26,12 @@ server <- function(input, output, session) {
     
     combinedData = rbind(weekData, calendarData)
     
-    print("csv updated")
-    
-    rv$combinedData <- combinedData
+    return(combinedData)
   })
   
   # Schedule plot
   output$schema <- renderTimevis({
-    combinedData <- rv$combinedData
+    combinedData <- combinedData()
     
     timevis(combinedData,
     showZoom = FALSE, fit = FALSE,
@@ -47,7 +47,7 @@ server <- function(input, output, session) {
     )
   })
   
-  # Add events to schedule
+  # Add events to schedule (maybe change this to directly edit the csv)
   observeEvent(input$addEvent, {
     addItem("schema",
             data = list(id = randomID(),
@@ -68,7 +68,7 @@ server <- function(input, output, session) {
     backupTable <- input$schema_data
     backupTable <- backupTable[!(backupTable$group == "Week"),]   # Don't save week numbers or IDs.
     backupTable$id = NULL
-    write.csv(backupTable, file = "calendar_backup.csv", row.names = FALSE)
+    write.csv(backupTable, file = backup_file, row.names = FALSE)
   })
   
   output$weekNr <- renderValueBox({
@@ -93,13 +93,5 @@ server <- function(input, output, session) {
   #     checkIcon = list(yes = icon("ok", lib = "glyphicon")) #, no = icon("remove", lib = "glyphicon")
   #   ) 
   # })
-  
-  # Temp data table output
-  output$table <- renderTable({
-    data <- input$schema_data
-    data
-  })
-  i <- 1
-  observeEvent(rv$calendar, i<-i+1)
                
 }

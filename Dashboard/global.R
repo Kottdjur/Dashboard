@@ -21,7 +21,8 @@ suppressPackageStartupMessages(library("dplyr"))
 # 
 
 
-setwd("C:/Users/kottd/Documents/Dashboard/Dashboard")
+#setwd("C:/Users/kottd/Documents/Dashboard/Dashboard")
+setwd("H:/Dokument/Dashboard/Dashboard")
 colsYear<-c(rev(brewer.pal(6, "RdYlBu")), brewer.pal(6, "RdYlBu"))
 
 Names<-c("Olof","Lina","Mahmoud","Ale","Maria","Anton","Tomas","Olle","Lisa")

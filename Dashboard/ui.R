@@ -34,8 +34,7 @@ body<-dashboardBody(
           selectInput("eventName", "Välj händelse", choices = c("Semester", "Fält", "Kontor")),
           dateInput("startDate", "Startdatum", as.Date(Sys.Date())),
           dateInput("endDate", "Slutdatum", as.Date(Sys.Date())),
-          actionButton("addEvent", "Add"),
-          tableOutput("test")
+          actionButton("addEvent", "Add")
         )
       )
     )
