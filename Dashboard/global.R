@@ -21,8 +21,8 @@ suppressPackageStartupMessages(library("dplyr"))
 # 
 
 
-#setwd("C:/Users/kottd/Documents/Dashboard/Dashboard")
-setwd("H:/Dokument/Dashboard/Dashboard")
+setwd("C:/Users/kottd/Documents/Dashboard/Dashboard")
+#setwd("H:/Dokument/Dashboard/Dashboard")
 colsYear<-c(rev(brewer.pal(6, "RdYlBu")), brewer.pal(6, "RdYlBu"))
 
 Names<-c("Olof","Lina","Mahmoud","Ale","Maria","Anton","Tomas","Olle","Lisa")
@@ -48,23 +48,8 @@ weekData <- data.frame(
   group = rep("Week", length(weeks[,1]))
 )
 
-# Load data from backup file on startup
-# calendar <- read.csv("calendar_backup.csv", stringsAsFactors = FALSE)
 startID <- tail(weekData$id, 1) + 1
 
-# calendarData <- data.frame(
-#   id = seq(startID, startID + length(calendar[,1]) -1, 1),
-#   start = as.character(calendar$start),
-#   end = as.character(calendar$end),
-#   content = calendar$content,
-#   style = rep(NA, length(calendar[,1])),
-#   group = calendar$group
-# )
-
-# Data to load into calendar
-# combinedData = rbind(weekData, calendarData)
-
-fikaweek<-matrix(cbind(weeks$weekNr, rep(Names,length.out=length(weeks[,1]))), ncol=2)
 fikaWeek <- data.frame(
   week = weeks$weekNr,
   name = rep(Names,length.out=length(weeks[,1]))
