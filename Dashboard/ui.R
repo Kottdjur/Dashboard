@@ -18,11 +18,13 @@ body<-dashboardBody(
   ),
   column(9,
     fluidRow(
-     valueBoxOutput("weekNr", width = 3),
-     # infoBoxOutput("weekNr", width = 3),
-     valueBoxOutput("temp", width = 3),
-     valueBoxOutput("fika", width = 3),
-     valueBoxOutput("fikaNext", width = 3)
+      #valueBoxOutput("weekNr", width = 3),
+      #infoBoxOutput("weekNr", width = 3),
+      valueBoxOutput("temp", width = 3),
+      valueBoxOutput("fika", width = 3),
+      valueBoxOutput("fikaNext", width = 3),
+      actionButton("fikaBack", icon("angle-double-left")),
+      actionButton("fikaNext", icon("angle-double-right"))
     ),
     fluidRow(
       tabBox(width = 12,

@@ -25,9 +25,11 @@ setwd("C:/Users/kottd/Documents/Dashboard/Dashboard")
 #setwd("H:/Dokument/Dashboard/Dashboard")
 colsYear<-c(rev(brewer.pal(6, "RdYlBu")), brewer.pal(6, "RdYlBu"))
 
+# In order of the fika list
 Names<-c("Olof","Lina","Mahmoud","Ale","Maria","Anton","Tomas","Olle","Lisa")
-groups <- data.frame(id = c("Week","Olof","Lina","Mahmoud","Ale","Maria","Anton","Tomas","Olle","Lisa"),
-                     content = c("Vecka","Olof","Lina","Mahmoud","Ale","Maria","Anton","Tomas","Olle","Lisa"))
+
+groups <- data.frame(id = c("Week", Names),
+                     content = c("Vecka", Names))
 
 urlWeather<-"https://api.openweathermap.org/data/2.5/weather?q=Uppsala,SE&units=metric&appid=97ff4d6525b004787e9152705e0db608"
 
