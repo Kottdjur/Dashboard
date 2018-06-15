@@ -3,7 +3,7 @@ server <- function(input, output, session) {
   
   temp <- reactiveVal(fromJSON(urlWeather)$main$temp)
   
-  # Refresh day and week every hour
+  # Refresh date and week every hour
   today <- reactive({
     invalidateLater(3600000)
     Sys.Date()
@@ -27,7 +27,7 @@ server <- function(input, output, session) {
       start = as.character(calendar$start),
       end = as.character(calendar$end),
       content = calendar$content,
-      style = rep(NA, length(calendar[, 1])),
+      className = calendar$content,
       group = calendar$group
     )
     
@@ -99,14 +99,14 @@ server <- function(input, output, session) {
     fika(fikaStep(-1))
   })
   
-  output$weekNr <- renderValueBox({
-    valueBox(
-      paste("Vecka", weekNr()),
-      today(),
-      icon = icon("calendar"),
-      color = "blue"
-    )
-  })
+  # output$weekNr <- renderValueBox({
+  #   valueBox(
+  #     paste("Vecka", weekNr()),
+  #     today(),
+  #     icon = icon("calendar"),
+  #     color = "blue"
+  #   )
+  # })
   
   output$fika <- renderValueBox({
     valueBox(Names[fika()],

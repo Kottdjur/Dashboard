@@ -1,0 +1,40 @@
+.vis-timeline {
+  border-color: white;
+}
+
+.vis-label.Week {
+  color: white;
+}
+
+.vis-item.Semester {
+  color: black;
+  background-color: #B3DE69;
+  border-color: #B3DE69;
+}
+
+.vis-item.Kontor {
+  color: black;
+  background-color: #80B1D3;
+  border-color: #80B1D3;
+}
+
+.vis-item.Fält {
+  color: black;
+  background-color: #FDB462;
+  border-color: #FDB462;
+}
+
+.vis-item.Week {
+	color: black;
+  background-color: #DCDCDC;
+  border-color: #C4C4C4;
+  border-width: 0 2px 0 0;
+  border-radius: 0;
+  text-align: center;
+  font-size: 18pt;
+}
+
+.vis-item.vis-selected {
+  border-color: #FFED6F;
+  background-color: #FFED6F;
+}

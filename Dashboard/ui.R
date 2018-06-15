@@ -6,7 +6,7 @@ body<-dashboardBody(
   tags$head(
     tags$link(rel="shortcut icon", href="./Greensway-Micro-logo-green.png"),
     # Include our custom CSS
-    # includeCSS("styles.css"),
+    includeCSS("C:/Users/kottd/Documents/Dashboard/Dashboard/www/style.css"),
     # tags$style(HTML('.info-box {min-height: 55px;} .info-box-icon {height: 55px; line-height: 55px;} .info-box-content {padding-top: 0px; padding-bottom: 0px;}')),
     tags$script('!function(d,s,id){
                 var js,fjs=d.getElementsByTagName(s)    [0],p=/^http:/.test(d.location)?\'http\':\'https\';

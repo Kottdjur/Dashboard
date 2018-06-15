@@ -20,7 +20,6 @@ suppressPackageStartupMessages(library("dplyr"))
 # frmData <- read.csv("semester.csv", header=TRUE, sep=",", encoding="UTF-8") 
 # 
 
-
 setwd("C:/Users/kottd/Documents/Dashboard/Dashboard")
 #setwd("H:/Dokument/Dashboard/Dashboard")
 colsYear<-c(rev(brewer.pal(6, "RdYlBu")), brewer.pal(6, "RdYlBu"))
@@ -29,7 +28,9 @@ colsYear<-c(rev(brewer.pal(6, "RdYlBu")), brewer.pal(6, "RdYlBu"))
 Names<-c("Olof","Lina","Mahmoud","Ale","Maria","Anton","Tomas","Olle","Lisa")
 
 groups <- data.frame(id = c("Week", Names),
-                     content = c("Vecka", Names))
+                     content = c("Vecka", Names),
+                     className = c("Week", rep("Names", length(Names)))
+                     )
 
 urlWeather<-"https://api.openweathermap.org/data/2.5/weather?q=Uppsala,SE&units=metric&appid=97ff4d6525b004787e9152705e0db608"
 
@@ -45,17 +46,12 @@ weekData <- data.frame(
   id = seq(1, length(weeks[,1]), 1),
   start = as.character(weeks$weekStart),
   end = as.character(weeks$weekEnd),
-  content = weeks$weekNr,
-  style = rep(NA, length(weeks[,1])),
+  content = paste("Vecka", weeks$weekNr),
+  className = rep("Week", length(weeks[,1])),
   group = rep("Week", length(weeks[,1]))
 )
 
 startID <- tail(weekData$id, 1) + 1
-
-fikaWeek <- data.frame(
-  week = weeks$weekNr,
-  name = rep(Names,length.out=length(weeks[,1]))
-)
 
 # Random ID generator for adding events interactively
 randomID <- function() {
